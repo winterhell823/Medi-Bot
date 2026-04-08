@@ -10,3 +10,5 @@ pillow
 pypdf
 torchvision
 
+langchain-groq
+

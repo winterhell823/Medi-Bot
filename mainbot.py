@@ -81,12 +81,12 @@ def login_user(email, password):
 # 👁️ Import your image retrieval pipeline
 from main_rag_pipeline import get_best_image_from_query
 
-# 🧠 Imports for Ollama RAG
+# 🧠 Imports for Groq API (Cloud LLM)
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_classic.chains import RetrievalQA
 from langchain_core.prompts import PromptTemplate
-from langchain_community.llms import Ollama
+from langchain_groq import ChatGroq
 
 # Global constants
 DB_FAISS_PATH = "vectorstore/db_faiss"
@@ -103,10 +103,18 @@ def set_custom_prompt(custom_prompt_template):
     prompt = PromptTemplate(template=custom_prompt_template, input_variables=["context", "question"])
     return prompt
 
-# 🚀 Load Ollama LLM
+# 🚀 Load Groq LLM (Cloud API)
 def load_llm():
-    llm = Ollama(
-        model="qwen3:4b",
+    # Looks for GROQ_API_KEY in Streamlit Secrets or local environment variables
+    api_key = st.secrets.get("GROQ_API_KEY", os.environ.get("GROQ_API_KEY", ""))
+    
+    if not api_key:
+        st.error("Error: GROQ_API_KEY is missing! Add it underneath 'Settings > Secrets' on Streamlit Cloud.")
+        st.stop()
+        
+    llm = ChatGroq(
+        model_name="llama3-8b-8192", 
+        api_key=api_key,
         temperature=0.5
     )
     return llm
