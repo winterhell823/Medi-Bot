@@ -113,7 +113,7 @@ def load_llm():
         st.stop()
         
     llm = ChatGroq(
-        model_name="llama3-8b-8192", 
+        model_name="llama-3.1-8b-instant", 
         api_key=api_key,
         temperature=0.5
     )
