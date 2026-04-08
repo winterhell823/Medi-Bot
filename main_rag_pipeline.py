@@ -1,7 +1,7 @@
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_core.documents import Document
-from IPython.display import Image
+from PIL import Image
 from sentence_transformers import SentenceTransformer
 import os
 
