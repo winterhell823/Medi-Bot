@@ -1,0 +1,15 @@
+# Python Virtual Environment
+.venv/
+env/
+venv/
+__pycache__/
+*.pyc
+
+# Local Databases (Crucial so you do not leak users passwords!)
+users.db
+
+# Vector Database Data
+vectorstore/db_faiss/
+
+# OS files
+.DS_Store
